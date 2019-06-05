@@ -1,6 +1,8 @@
 #d-th power residue symbol
 #(a/b)_d, b irreducible, d|q-1, F_q
 
+#Blabla
+
 #gcd(a,b) != 1 => (a/b)_d = 0
 
 include("hoch.jl")
