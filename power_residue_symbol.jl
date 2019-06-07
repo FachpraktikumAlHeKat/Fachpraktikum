@@ -22,8 +22,6 @@ function power_residue(a,b,d,symbol,q)
   #oben und unten tauschen -> rekursiver Aufruf (allgemeines Reziprozitaetsgesetz)
   symbol = hoch( -1, div(q-1, d) * degree(a) * degree(b) ) * hoch( leading_coefficient(a), degree(b) ) * hoch( leading_coefficient(b), (-degree(a)) ) * symbol(b,a,d,1,q)
 
-
-
   return symbol
 
 end
