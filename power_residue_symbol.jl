@@ -13,9 +13,11 @@ function power_residue(a,b,d,symbol,q)
     return a_b_d
   end
 
+  #falsch!? ---------------------------------
   if degree(a)==0                               #(!if b irreducible!) a konstant -> Formel
     return a^( div((q-1),d) * degree(b) )
   end
+  #------------------------------------------
 
   a = mod(a,b)                                  #oberen Teil reduzieren
 
