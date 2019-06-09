@@ -22,7 +22,8 @@ function power_residue(a,b,d,symbol,q)
   a = mod(a,b)                                  #oberen Teil reduzieren
 
   #oben und unten tauschen -> rekursiver Aufruf (allgemeines Reziprozitaetsgesetz)
-  symbol = hoch( -1, div(q-1, d) * degree(a) * degree(b) ) * hoch( leading_coefficient(a), degree(b) ) * hoch( leading_coefficient(b), (-degree(a)) ) * symbol(b,a,d,1,q)
+  exp = div(q-1,d)
+  symbol = hoch( -1, div(q-1, d) * degree(a) * degree(b) ) * hoch( leading_coefficient(a^exp), degree(b) ) * hoch( leading_coefficient(b^exp), (-degree(a)) ) * symbol(b,a,d,1,q)
 
   return symbol
 
