@@ -13,17 +13,19 @@ function power_residue(a,b,d,symbol,q)
     return a_b_d
   end
 
+  a = mod(a,b)
+
 #falsch!? ---------------------------------
   if degree(a)==0                               #(!if b irreducible!) a konstant -> Formel
     return a^( div((q-1),d) * degree(b) )
   end
 #------------------------------------------
 
-  a = mod(a,b)                                  #oberen Teil reduzieren
+  #a = mod(a,b)                                  #oberen Teil reduzieren
 
   #oben und unten tauschen -> rekursiver Aufruf (allgemeines Reziprozitaetsgesetz)
   exp = div(q-1,d)
-  symbol = hoch( -1, div(q-1, d) * degree(a) * degree(b) ) * hoch( leading_coefficient(a^exp), degree(b) ) * hoch( leading_coefficient(b^exp), (-degree(a)) ) * symbol(b,a,d,1,q)
+  symbol =  -1^Int(div(q-1, d) * degree(a) * degree(b) ) * leading_coefficient(a^exp)^Int(degree(b)) * leading_coefficient(b^exp)^Int(-degree(a)) * power_residue(b,a,d,1,q)
 
   return symbol
 
