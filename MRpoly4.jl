@@ -92,10 +92,10 @@ end
 
 #-----------------------------------------------------------------------------
 
-function MRpoly4(f)
+function MRpoly4(f,a)
 	kx = parent(f)
   p = characteristic(base_ring(kx))
-	a = rand(kx, degree(f))
+	#a = rand(kx, degree(f))
 
   t = 0                     #Exponent wie in MR
 	ord = p^degree(f)-1		    #Ordnung von Einheitengruppe von R (wenn f irred.)
