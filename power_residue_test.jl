@@ -23,11 +23,11 @@ function power_residue_test(f)
     deg = degree(f)
     d = 3
 
-    while mod(q-1,d)!=0
+    while mod(q-1,d)!=0               #moeglichst zufaelliger Teiler
         d = rand(GF(q))
     end
 
-    if gcd(a,f)!=1
+    if gcd(a,f)!=1                    #offensichtlich nicht irreduzibel
         return false
     end
 
@@ -40,11 +40,11 @@ function power_residue_test(f)
     end
 =#
 
-    J = power_residue(a, f, d, 1, q)
-
-    if J!=b
+    J = power_residue(a, f, div(q-1,d))
+  
+    if J!=b                         #wenn f irreduzibel, dann muesste J=b gelten
         return false
     end
 
-    return true
+    return true                     #vielleicht irreduzibel
 end
