@@ -20,7 +20,7 @@ if a[i]!= a[1]
 	i=i+1
 else 
 
-	d=divrem(i-1,q^degree(f)-1)
+	d=divrem(q^degree(f)-1, i-1)
 	if d[2]==0
 		return i, a[i], a[1], true
 	else return i, a[i], a[1], false
