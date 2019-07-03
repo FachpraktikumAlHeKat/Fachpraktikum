@@ -22,7 +22,7 @@ else  # sonst a1=ai-1 und a2=ai
 
 	#d=divrem(q^degree(f)-1,i-2)
 	#if d[2]==0
-	if mod(q^degree(f)-1,i-1)==0	
+	if mod(q^degree(f)-1,i-2)==0	
 		return i, a[i], a[1], true
 	else return i, a[i], a[1], false
 		
