@@ -18,7 +18,8 @@ function periodtest(f)
 	b = kt(1)
 	d = 7		#da q=29
 	if power_residue(a^2-4*b,f,div(q-1,d))==1
-		return
+		#return
+		error("Diskriminante ...")
 	end
 #-------------------------------------------------------------
 	#Ring fuer Rekursionspolynom
@@ -60,6 +61,7 @@ function periodtest(f)
 	#return u,v
 #-------------------------------------------------------------
 #Test
+#wenn irreduzibel => Periode |n => a_n=a_0 und a_(n+1)=a_1	
 	if u==x0&&v==x1
 		return true
 	else
