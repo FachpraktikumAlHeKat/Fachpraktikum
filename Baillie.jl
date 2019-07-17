@@ -1,36 +1,69 @@
-# Rekursionsfolgentest
-# KLAPPT NOCH NICHT!!!!!
+#Rekursionsfolgentest
+#explizit berechnet
 
-q=29
-k=ResidueRing(ZZ,q)
-kx,x = k["x"]
+include("power_residue_symbol.jl")
 
+function periodtest(f)
 
-function recursionstest(f,q)
+	#Ring fuer a,b (Rekursionsparameter)
+#=
+	q = 29
+	k = ResidueRing(ZZ,q)
+	kt,t = k["t"]
+=#
+	kt = parent(f)
+   	q = characteristic(base_ring(kt))
 
-# mache dir eine Rekursionsfolge
-a=Array{nmod_poly}(undef,q^degree(f)+3)
-
-a[1]= x
-a[2]=x^2+8*x+18
-a[3]=mod(a[1]+a[2],f)				# schonmal festlegen, sonst meckert er!
-for i in 3:(q^(degree(f)))
-if a[i]!= a[2] || a[i-1]!= a[1] 
-	a[i+1]= mod(a[i]+a[i-1],f)
-print(i ,"\n")
-else  # sonst a1=ai-1 und a2=ai
-
-	#d=divrem(q^(degree(f))-1,i-2)		# i-2 ist Periode, wenns ab i-1 wiederholt
-	#if d[2]==0
-	if mod(q^(degree(f))-1,i-2)==0	
-		return i, a[i], a[1], true
+	a = kt(t+1)
+	b = kt(1)
+	d = 7		#da q=29
+	if power_residue(a^2-4*b,f,div(q-1,d))==1
+		return
 	end
-		
-end
-i=k
-end
-return a[k], a[1], false
-# wir haben immer bei i= 16 die rückgabe true- ich verstehe nur nicht warum
-end
+#-------------------------------------------------------------
+	#Ring fuer Rekursionspolynom
+#=
+	kts,s = kt["s"]
+	rp = kts(s^2-a*s+b)
+=#
 
-	
+	#Ring fuer Lucas-Folge
+	T = ResidueRing(kt,f)
+	S,s = T["s"]
+	rp = s^2-a*s+b
+	R = ResidueRing(S,rp)
+
+	#Startwerte
+	x0 = R(2)
+	x1 = R(a)
+
+	u = x0
+	v = x1
+#-------------------------------------------------------------
+	#Periode soll Teiler von n sein (a_n=a_0 und a_(n+1)=a_1)
+	n = (q^Int(degree(f)))^2-1
+	#n = digits(n, base=2)
+	n = base(n,2)
+	B = length(n)
+
+	#n-tes und (n+1)-tes Glied der Rekursion explizit berechnet
+	#for i=B:-1:1
+	for i=1:B
+		if n[i]=='1'
+			u = u*v-a
+			v = v^2-2
+		else
+			v = u*v-a
+			u = u^2-2
+		end
+	end
+	#return u,v
+#-------------------------------------------------------------
+#Test
+	if u==x0&&v==x1
+		return true
+	else
+		return false
+	end
+
+end
